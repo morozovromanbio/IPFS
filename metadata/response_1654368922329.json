@@ -1,0 +1,61 @@
+{
+  "file": {
+    "fileName": "3-14.png",
+    "mimetype": "image/png",
+    "storageName": "8b861ff0421b470777734288ce120a89",
+    "size": 1704713
+  },
+  "metadata": {
+    "name": "id#0 first file we have uploaded to IPFS",
+    "description": "string",
+    "author": "string",
+    "timestamp": 0,
+    "type": "string",
+    "class": "string",
+    "score": 0
+  },
+  "ipfs": {
+    "path": "QmUo3qMLRgN7zEo5Uyk56ib2yVEGy4c4WdCG6XbiyjZnUG",
+    "cid": {
+      "code": 112,
+      "version": 0,
+      "hash": {
+        "0": 18,
+        "1": 32,
+        "2": 95,
+        "3": 233,
+        "4": 94,
+        "5": 185,
+        "6": 46,
+        "7": 38,
+        "8": 48,
+        "9": 170,
+        "10": 200,
+        "11": 113,
+        "12": 58,
+        "13": 25,
+        "14": 80,
+        "15": 2,
+        "16": 226,
+        "17": 39,
+        "18": 227,
+        "19": 110,
+        "20": 32,
+        "21": 199,
+        "22": 31,
+        "23": 74,
+        "24": 58,
+        "25": 155,
+        "26": 16,
+        "27": 232,
+        "28": 190,
+        "29": 10,
+        "30": 223,
+        "31": 49,
+        "32": 179,
+        "33": 97
+      }
+    },
+    "size": 1705155
+  }
+}
