@@ -1,3 +1,5 @@
 ## Project Server emulation folders
 /upload
 /db
+# Project files
+.env
