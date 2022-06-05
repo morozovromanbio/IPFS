@@ -152,6 +152,37 @@ export class AppController {
       throw new HttpException(error.message, 503);
     }
   }
+  @Get('ipfs-get-metadata/:id')
+  @ApiOperation({
+    summary: 'Get file of element by id from ipfs',
+    description: 'Gets the file of element at the requested index',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Element file',
+  })
+  @ApiResponse({
+    status: 503,
+    description: 'The server is not configured correctly',
+    type: HttpException,
+  })
+  async getFileMetadataIpfs(
+    @Response({ passthrough: true }) res,
+    @Param('id') id: number,
+  ) {
+    try {
+      const fileData = this.appService.get(id).file;
+      const fileStream = await this.appService.getFromIpfs(id);
+      res.set({
+        'Content-Type': fileData.mimetype,
+        'Content-Disposition': `attachment; filename="${fileData.fileName}"`,
+      });
+      return fileStream;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(error.message, 503);
+    }
+  }
 
   @Post('file')
   @ApiOperation({
