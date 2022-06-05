@@ -92,6 +92,28 @@ export class AppController {
       throw new HttpException(error.message, 503);
     }
   }
+  @Get('metadate/:id')
+  @ApiOperation({
+    summary: 'Get metadata by id',
+    description: 'Gets the metadata at the requested index',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Element',
+  })
+  @ApiResponse({
+    status: 503,
+    description: 'The server is not configured correctly',
+    type: HttpException,
+  })
+  async getMetadata(@Param('id') id: number) {
+    try {
+      const result = this.appService.getMetadata(id);
+      return result;
+    } catch (error) {
+      throw new HttpException(error.message, 503);
+    }
+  }
 
   @Get('file/:id')
   @ApiOperation({
@@ -152,9 +174,10 @@ export class AppController {
       throw new HttpException(error.message, 503);
     }
   }
+  ////////////
   @Get('ipfs-get-metadata/:id')
   @ApiOperation({
-    summary: 'Get file of element by id from ipfs',
+    summary: 'Get metadata of element by id from ipfs',
     description: 'Gets the file of element at the requested index',
   })
   @ApiResponse({

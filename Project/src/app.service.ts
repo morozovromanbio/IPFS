@@ -51,6 +51,26 @@ export class AppService {
     return this.get(fileId);
   }
 
+  getMetadata(fileId: number) {
+    let file: any;
+    let metadata: MetadataDto;
+    try {
+      file = this.db.getData(`/${fileId}/file`);
+    } catch (error) {
+      return { error };
+    }
+    if (!file) return false;
+
+    try {
+      metadata = this.db.getData(`/${fileId}/metadata`);
+    } catch (error) {
+      return { error };
+    }
+    if (!file) return false;
+
+    return metadata;
+  }
+
   getAll() {
     return this.db.getData('/');
   }
