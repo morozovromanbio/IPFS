@@ -1,34 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, HttpException } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AccountService } from './account.service';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
 
 @Controller('account')
+@ApiTags('account')
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
-  @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountService.create(createAccountDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.accountService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accountService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
-    return this.accountService.update(+id, updateAccountDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.accountService.remove(+id);
+  @Get('server-balance')
+  @ApiOperation({
+    summary: 'Server account balance',
+    description: 'Gets the server balance expressed in network tokens',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Server balance in network tokens',
+    type: Number,
+  })
+  @ApiResponse({
+    status: 503,
+    description:
+      'The server is not connected to a valid provider or server account is not set up',
+    type: HttpException,
+  })
+  async getServerBalance() {
+    try {
+      const result = await this.accountService.getServerAccountBalance();
+      return Number(result);
+    } catch (error) {
+      throw new HttpException(error.message, 503);
+    }
   }
 }
