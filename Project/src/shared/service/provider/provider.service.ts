@@ -11,6 +11,7 @@ export class ProviderService {
   setupProvider() {
     const networkName = process.env.PROVIDER_NETWORK;
     if (!networkName || networkName.length === 0) return;
+
     const infuraOptions = process.env.PROVIDER_OPTIONS_INFURA_PROJECT_ID
       ? process.env.PROVIDER_OPTIONS_INFURA_PROJECT_SECRET
         ? {
@@ -19,10 +20,12 @@ export class ProviderService {
           }
         : process.env.PROVIDER_OPTIONS_INFURA_PROJECT_ID
       : '';
+
     const options = {
       alchemy: process.env.PROVIDER_OPTIONS_ALCHEMY_TOKEN,
       infura: infuraOptions,
     };
+
     const provider = ethers.providers.getDefaultProvider(networkName, options);
     this.provider = provider;
   }
@@ -33,6 +36,7 @@ export class ProviderService {
     return balance;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
   async getBlockData(blockHashOrTag: string = 'latest') {
     const block = await this.provider.getBlock(blockHashOrTag);
     return block;

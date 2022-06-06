@@ -1,26 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBlockDto } from './dto/create-block.dto';
-import { UpdateBlockDto } from './dto/update-block.dto';
+import { ProviderService } from 'src/shared/service/provider/provider.service';
 
 @Injectable()
 export class BlockService {
-  create(createBlockDto: CreateBlockDto) {
-    return 'This action adds a new block';
+  constructor(private providerService: ProviderService) {}
+
+  async getLastBlock() {
+    return await this.providerService.getBlockData();
   }
 
-  findAll() {
-    return `This action returns all block`;
+  async getBlockByHash(hash: string) {
+    return await this.providerService.getBlockData(hash);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} block`;
-  }
-
-  update(id: number, updateBlockDto: UpdateBlockDto) {
-    return `This action updates a #${id} block`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} block`;
+  async getTransactionReceipt(hash: string) {
+    return await this.providerService.getTransactionReceipt(hash);
   }
 }

@@ -1,3 +1,6 @@
+//SPDX-License-Identifier: Unlicense
+pragma solidity 0.8.14;
+
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
@@ -9,13 +12,22 @@ contract EncodeNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     Counters.Counter private _tokenIdCounter;
 
+    string public baseURISet = "http://localhost:3000/";
+
     constructor() ERC721("Encode NFT", "ENFT") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
     }
 
-    function _baseURI() internal pure override returns (string memory) {
-        return "http://localhost:3000/";
+    /// @notice for contract owner to set token base URI
+    /// @param _baseURICreated based on metadata of token in IPFS
+    function setBaseURI(string memory _baseURICreated) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        baseURISet = _baseURICreated;
+    }
+  
+      /// @dev overrides original empty string with base URI to be set by owner
+    function _baseURI() internal view virtual override returns (string memory) {
+        return baseURISet;
     }
 
     function safeMint(address to, string memory uri) public onlyRole(MINTER_ROLE) {
@@ -48,4 +60,7 @@ contract EncodeNFT is ERC721, ERC721URIStorage, ERC721Burnable, AccessControl {
     {
         return super.supportsInterface(interfaceId);
     }
+
+    fallback() external payable {}
+    receive() external payable {}
 }

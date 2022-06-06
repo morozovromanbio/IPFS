@@ -5,7 +5,8 @@
 export const environment = {
   network: 'ropsten',
   //tokenContractAddress: '0x03d25a324b3c56f3520ce74df120D6b984522A99',
-  tokenContractAddress: '0x27393f12af9D7A4cB7B85B952809e7639e6E0a8e',
+  tokenContractAddressERC20: '0x27393f12af9D7A4cB7B85B952809e7639e6E0a8e',
+  tokenContractAddress: '0x0c1582a9Ace5F465a480B5458FDF42e0d24D8C62',
   apiAddress: 'http://127.0.0.1:3000/',
   production: false
 };
