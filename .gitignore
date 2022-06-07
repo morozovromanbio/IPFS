@@ -2,4 +2,6 @@
 /upload
 /db
 # Project files
+Project/.env
+/Project/.env
 .env

@@ -168,7 +168,8 @@ export class DashboardComponent implements OnInit {
   }
 
   requestToken(URI: string) {
-    this.blockchainService.signTokenRequest(URI).then((signature) => {console.log(signature)});
+    //this.blockchainService.signTokenRequest(URI).then((signature) => {console.log(signature)});
+    this.blockchainService.signTokenRequest(`http://localhost:3000/metadate/${URI}`).then((signature) => {console.log(signature)});
     // this.blockchainService.signTokenRequest(URI).then((signature) => {
     //   this.apiService
     //     .requestToken(
