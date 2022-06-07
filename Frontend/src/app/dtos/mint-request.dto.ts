@@ -1,3 +1,3 @@
 export class MintRequestDto {
-  constructor(public address: string, public amount: number, public signature: string) {}
+  constructor(public address: string, public URI: string, public signature: string) {}
 }

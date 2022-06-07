@@ -38,18 +38,22 @@ export class ContractService {
     return balance;
   }
 
-  async mintTokens(address: string, amount: number) {
+  async mintTokens(address: string, URI: string) {
     const tx = await this.contractSignedInstance.mint(
       address,
-      ethers.utils.parseEther(amount.toFixed(18)),
+      //ethers.utils.parseEther(amount.toFixed(18)),
+      URI,
     );
     return tx;
   }
 
-  checkSignature(address: string, amount: number, signature: string) {
-    const signatureObject = {address: address, amount: amount};
+  checkSignature(address: string, URI: string, signature: string) {
+    const signatureObject = { address: address, URI: URI };
     const signatureMessage = JSON.stringify(signatureObject);
-    const signerAddress = ethers.utils.verifyMessage(signatureMessage, signature);
+    const signerAddress = ethers.utils.verifyMessage(
+      signatureMessage,
+      signature,
+    );
     return signerAddress == address;
   }
 }

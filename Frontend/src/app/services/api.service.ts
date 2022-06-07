@@ -22,8 +22,13 @@ export class ApiService {
     return this.http.get<ethers.providers.TransactionReceipt>(`${this.apiUrl}block/transaction/${hash}`);
   }
 
-  requestToken(address: string, amount: number, signature: string) {
-    const requestDto = new MintRequestDto(address, amount, signature);
+  getMetadata(id: number) {
+   // return this.http.get<JSON>(`${this.apiUrl}metadate/${id}`);
+    return this.http.get(`${this.apiUrl}metadate/${id}`);
+  }
+
+  requestToken(address: string, URI: string, signature: string) {
+    const requestDto = new MintRequestDto(address, URI, signature);
     return this.http.post<ethers.providers.TransactionResponse>(
       `${this.apiUrl}contract/mint-token`,
       requestDto

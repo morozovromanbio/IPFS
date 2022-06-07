@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethers, EventFilter } from 'ethers';
-import TokenContract from 'src/assets/contracts/Token.json';
+import TokenContract from 'src/assets/contracts/EncodeNFT.json';
 
 @Injectable({
   providedIn: 'root',
@@ -103,10 +103,10 @@ export class BlockchainService {
     this.tokenContractInstance.on(filterTo, (event) => callbackFn(event));
   }
 
-  async signTokenRequest(amount: number) {
+  async signTokenRequest(URI: string) {
     const signatureObject = {
       address: this.userWallet.address,
-      amount: amount,
+      URI: URI,
     };
     const signatureMessage = JSON.stringify(signatureObject);
     return await this.userWallet.signMessage(signatureMessage);

@@ -79,17 +79,21 @@ export class ContractController {
     try {
       signatureValid = this.contractService.checkSignature(
         mintRequestDto.address,
-        mintRequestDto.amount,
+        mintRequestDto.URI,
         signature,
       );
     } catch (error) {
-      throw new HttpException("Invalid signature: " + error.message, 500);
+      throw new HttpException('Invalid signature: ' + error.message, 500);
     }
-    if (!signatureValid) throw new HttpException('Signature does not match with the requested address', 403);
+    if (!signatureValid)
+      throw new HttpException(
+        'Signature does not match with the requested address',
+        403,
+      );
     try {
       const result = await this.contractService.mintTokens(
         mintRequestDto.address,
-        mintRequestDto.amount,
+        mintRequestDto.URI,
       );
       return result;
     } catch (error) {

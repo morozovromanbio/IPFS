@@ -4,7 +4,7 @@ export class MintRequestDto {
   @ApiProperty({
     required: true,
     description: 'Address that will receive the tokens',
-    example: '0x74121B1461631a021Dd36528baeBeCB45e61552f',
+    example: '0xa1d0E5A80cbCD4e93e4D3595a93796188754a8CB',
     minLength: 42,
     maxLength: 42,
   })
@@ -12,11 +12,10 @@ export class MintRequestDto {
 
   @ApiProperty({
     required: true,
-    description: 'Amount of tokens to be minted',
-    example: 42,
-    minimum: 0.000000000000000001,
+    description: 'URI token to be minted',
+    example: 'http://localhost:3000/metadate/1',
   })
-  amount: number;
+  URI: string;
 
   @ApiProperty({
     required: true,

@@ -22,9 +22,9 @@
         <form>
           <div class="d-flex justify-content-evenly mt-4 mx-4 px-4">
             <div class="mb-3 col-md-5">
-              <label for="amount" class="form-label">Amount of tokens</label>
+              <label for="amount" class="form-label">Metadata of tokens</label>
               <input #amount type="number" class="form-control text-center" id="amount" aria-describedby="amount">
-              <div id="amount" class="form-text">Amount of tokens to claim</div>
+              <div id="amount" class="form-text">metadata for token to claim</div>
             </div>
             <div class="mb-3 mt-4 col-md-3">
               <button type='button' class="button btn-lg btn-primary w-100"
@@ -44,7 +44,7 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Amount</th>
+              <th scope="col">URI</th>
               <th scope="col">Hash</th>
               <th scope="col">Confirmations</th>
             </tr>
@@ -52,7 +52,7 @@
           <tbody>
             <tr *ngFor="let tx of pendingTx; index as i">
               <th scope="row">{{i + 1}}</th>
-              <td>{{tx.amount}}</td>
+              <td>{{tx.URI}}</td>
               <td>{{tx.hash}}</td>
               <td>{{tx.updateOngoing ? "..." : tx.confirmations < 5 ? tx.confirmations : "5+" }}</td>
             </tr>

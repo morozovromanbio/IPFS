@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   watchPendingTxsInterval: NodeJS.Timeout | null = null;
   serverBlock = 0;
   pendingTx: {
-    amount: number;
+    URI: string;
     hash: string;
     confirmations: number;
     updateOngoing?: boolean;
@@ -131,6 +131,7 @@ export class DashboardComponent implements OnInit {
       });
     }, 10000);
   }
+  
 
   private watchPendingRequests() {
     this.watchPendingTxsInterval = setInterval(() => {
@@ -166,23 +167,22 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  requestToken(amountStr: string) {
-    const amount = Number(amountStr);
-   // this.blockchainService.signTokenRequest(amount).then((signature) => {console.log(signature)});
-    this.blockchainService.signTokenRequest(amount).then((signature) => {
-      this.apiService
-        .requestToken(
-          this.blockchainService.userWallet.address,
-          amount,
-          signature
-        )
-        .subscribe((res) => {
-          this.pendingTx.push({
-            amount: amount,
-            hash: res.hash,
-            confirmations: res.confirmations,
-          });
-        });
-    });
+  requestToken(URI: string) {
+    this.blockchainService.signTokenRequest(URI).then((signature) => {console.log(signature)});
+    // this.blockchainService.signTokenRequest(URI).then((signature) => {
+    //   this.apiService
+    //     .requestToken(
+    //       this.blockchainService.userWallet.address,
+    //       URI,
+    //       signature
+    //     )
+    //     .subscribe((res) => {
+    //       this.pendingTx.push({
+    //         URI: URI,
+    //         hash: res.hash,
+    //         confirmations: res.confirmations,
+    //       });
+    //     });
+    // });
   }
 }
